@@ -3,6 +3,9 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
+// components
+//import ImageUploader from '@/components/ImageUploader.vue'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
