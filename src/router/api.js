@@ -9,5 +9,12 @@ const apiClient = axios.create({
 export default {
   fetchData() {
     return apiClient.get('/ingredients');
+  },
+  addIgredient(item){
+    const data = { name: item }
+    return apiClient.post('/ingredients', data);
+  },
+  deleteIngredient(item_id){
+    return apiClient.delete('/ingredients/' + item_id);
   }
 };

@@ -7,17 +7,26 @@
 
 <template>
   <div>
-    <h2>Food Items</h2>
-    {{ fetchData() }}
-    <ul>
-      <li v-for="(item, index) in foodItems" :key="index">
-        {{ item }}
-        <button @click="deleteItem(index)">Delete</button>
+    <h3>Food Items</h3>
+   
+    {{ console.log("foodItems :", foodItems) }}
+    <ul class="list-group list-group-flush p-3 m-3 border rounded">
+      <li v-for="(item, index) in foodItems" :key="index" class="list-group-item">
+        <div class="row">
+          <div class="col d-flex align-self-end">
+            {{ item.name }}
+          </div>
+          <div class="col-3 d-flex justify-content-around">
+            <button @click="" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></button>
+            <button @click="deleteItem(index, item)" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
       </li>
     </ul>
-    <div>
+    <div class="d-flex justify-content-center">
       <input type="text" v-model="newItem" placeholder="Enter a new food item">
-      <button @click="addItem">Add</button>
+      <button @click="addItem" class="btn btn-success rounded-circle"><i class="fa-solid fa-plus"></i></button>
+      <button @click="fetchFoodList" class="btn btn-success rounded">fetch</button>
     </div>
   </div>
 </template>
@@ -29,32 +38,45 @@ export default {
   data() {
     return {
       foodItems: [],
-      newItem: ''
+      newItem: '', 
+      count: 0
     };
   },
   methods: {
-    fetchData() {
+    fetchFoodList() {
       api.fetchData()
         .then(response => {
-          // Handle the response data
-          console.log(response.data);
+          this.foodItems = response.data.data.ingredients;
+          console.log(response.data)
         })
         .catch(error => {
-          // Handle the error
           console.error(error);
         });
+    },
+    callFetch(count){
+      if (count == 0){
+        this.fetchFoodList();
+      }
     },
     addItem() {
       if (this.newItem !== '') {
         this.foodItems.push(this.newItem);
+        api.addIgredient(this.newItem)
         this.newItem = '';
       }
     },
-    deleteItem(index) {
+    deleteItem(index, item) {
       this.foodItems.splice(index, 1);
+      api.deleteIngredient(item.id)
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => {
+          console.error(error);
+        })
     },
-    async mounted() {
-      await this.fetchFoodList()
+    mounted() {
+      foodItems = fetchFoodList();
     }
   }
 };
