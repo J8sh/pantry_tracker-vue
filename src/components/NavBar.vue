@@ -12,6 +12,8 @@
                 </li>
             </ul>
             </div>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="/login" >Login</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="/logout" >Logout</a>
         </div>
     </nav>
 </template>
