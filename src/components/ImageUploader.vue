@@ -44,6 +44,7 @@
                         console.log(data[i].class)
                         //data[i].class;
                     }
+                    alert("food items uploaded!")
                 })
                 .catch(function(error) {
                     console.log(error.message);
@@ -60,6 +61,7 @@
         <div class="container img-container text-center g-0">
             <img v-if="filePreview !== null" :src="filePreview" alt="File Preview" class="shadow img-fluid" />
             <div v-else><i class="fa-solid fa-cloud-arrow-up upload-icon p-4 my-4 shadow rounded"></i></div>
+            <div id="testbox"></div>
         </div>
         <div class="custom-file my-3 text-center">
             <input type="file" class="custom-file-input" @change="previewFile" ref="fileInput" />

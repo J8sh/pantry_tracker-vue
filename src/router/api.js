@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-var simplecrypt = require("simplecrypt");
-
-var sc = simplecrypt();
-            
-
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 
 // Define your API base URL
 const apiClient = axios.create({
@@ -32,12 +27,10 @@ export default {
     return apiClient.post('/user/create', data);
   },
   userLogin(user){
-    var hashPass = sc.encrypt(user.password)
-    console.log(hashPass)
-
-    var mess = sc.decrypt(hashPass)
-    console.log(mess)
     const data = { email: user.email, password: user.password}
     return apiClient.post('/user/login', data)
+  },
+  getRecipes(food){
+    return apiClient.get('/recipes', food)
   }
 };

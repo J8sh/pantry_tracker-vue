@@ -1,16 +1,20 @@
 <style setup>
-    #food-list {
-      padding: 10px;
-      border: 1px solid #ccc;
+    .new-food{
+      border: none;
+    }
+    .food-display{
+      min-height: 300px;
     }
 </style>
 
 <template>
   <div>
-    <h3>Food Items</h3>
-   
+    <div class="row">
+    <div class="col-auto"><h3>Food Items</h3></div>
+    <div class="col-6"><button @click="fetchFoodList" class="btn btn-success rounded">fetch</button></div>
+    </div>
     {{ console.log("foodItems :", foodItems) }}
-    <ul class="list-group list-group-flush p-3 m-3 border rounded">
+    <ul class="food-display list-group list-group-flush p-3 m-3 border rounded">
       <li v-for="(item, index) in foodItems" :key="index" class="list-group-item">
         <div class="row">
           <div class="col d-flex align-self-end">
@@ -23,10 +27,9 @@
         </div>
       </li>
     </ul>
-    <div class="d-flex justify-content-center">
-      <input type="text" v-model="newItem" placeholder="Enter a new food item">
+    <div class="my-3 d-flex justify-content-center">
+      <input type="text" v-model="newItem" placeholder="Enter a new food item" class="new-food">
       <button @click="addItem" class="btn btn-success rounded-circle"><i class="fa-solid fa-plus"></i></button>
-      <button @click="fetchFoodList" class="btn btn-success rounded">fetch</button>
     </div>
   </div>
 </template>
