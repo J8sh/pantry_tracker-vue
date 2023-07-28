@@ -20,7 +20,6 @@
                 reader.readAsDataURL(file);
             },
             sendImage(img){
-
                 axios({
                     method: "POST",
                     url: "https://detect.roboflow.com/aicook-lcv4d/3",
@@ -80,10 +79,6 @@
 .img-preview {
     max-height: auto;
     width: auto;
-}
-
-.img-container {
-   
 }
 
 .upload-icon{

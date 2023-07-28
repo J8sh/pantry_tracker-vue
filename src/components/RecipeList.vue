@@ -42,14 +42,16 @@ export default {
     getRecipes(){
         api.fetchData()
             .then(response => {
-                this.listOfFood = '';
+                this.listOfFood = [];
                 const data = response.data.data.ingredients;
                 for(let i = 0; i < data.length; i ++){
                     this.listOfFood.push(data[i].name)
                 }
                 console.log(data)
                 console.log(this.listOfFood)
+                
                 this.searchSpoon(this.listOfFood)
+                
             })
             .catch(error => {
                 console.error(error);
@@ -57,14 +59,6 @@ export default {
     },
     searchSpoon(list_items){
         const ingredients_list = list_items.join();
-        const params = {
-          ingredients: ingredients_list,
-          number: 10,
-          limitLicense: true, 
-          ranking: 1, 
-          ignorePantry: false
-        }
-        api.getRecipes(ingredients_list);
         axios({
             method: "GET",
             url: "https://api.spoonacular.com/recipes/findByIngredients",
@@ -82,10 +76,8 @@ export default {
             }
         })
         .then(function(response) {
-            //this.recipeList = response.data;
-            console.log(response.data);
-            this.recipeList = response.data;
-            //console.log(this.recipeList);
+          console.log(response.data);
+          
         })
         .catch(function(error) {
             console.log(error.message);

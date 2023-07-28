@@ -13,7 +13,6 @@
     <div class="col-auto"><h3>Food Items</h3></div>
     <div class="col-6"><button @click="fetchFoodList" class="btn btn-success rounded">fetch</button></div>
     </div>
-    {{ console.log("foodItems :", foodItems) }}
     <ul class="food-display list-group list-group-flush p-3 m-3 border rounded">
       <li v-for="(item, index) in foodItems" :key="index" class="list-group-item">
         <div class="row">
@@ -21,7 +20,7 @@
             {{ item.name }}
           </div>
           <div class="col-3 d-flex justify-content-around">
-            <button @click="" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></button>
+            <!-- <button @click="" class="btn btn-warning"><i class="fa-regular fa-pen-to-square"></i></button> -->
             <button @click="deleteItem(index, item)" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
@@ -63,9 +62,10 @@ export default {
     },
     addItem() {
       if (this.newItem !== '') {
-        this.foodItems.push(this.newItem);
+        this.foodItems.push({name: this.newItem});
         api.addIgredient(this.newItem)
         this.newItem = '';
+        this.fetchFoodList()
       }
     },
     deleteItem(index, item) {

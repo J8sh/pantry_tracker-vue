@@ -30,7 +30,8 @@ export default {
     const data = { email: user.email, password: user.password}
     return apiClient.post('/user/login', data)
   },
-  getRecipes(food){
-    return apiClient.get('/recipes', food)
+  createRecipes(food){
+    const data = {image: food.image, name: food.name}
+    return apiClient.post('/recipes')
   }
 };
