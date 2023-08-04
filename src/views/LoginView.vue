@@ -1,5 +1,6 @@
 <script>
 import api from '../router/api.js'
+import router from '../router/index.js'
 
 
 export default {
@@ -16,7 +17,7 @@ export default {
             api.userLogin(this.user)
                 .then(response => {
                     console.log(response.data)
-                    // if array is zero then , email or password is wrong
+                    router.push({ path: '/' })
                 })
                 .catch(error => {
                     console.error(error);
