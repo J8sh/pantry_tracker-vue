@@ -39,7 +39,7 @@ export default {
     };
   },
   methods: {
-    getRecipes(){
+    async getRecipes(){
         api.fetchData()
             .then(response => {
                 this.listOfFood = [];
@@ -57,7 +57,8 @@ export default {
                 console.error(error);
             });
     },
-    searchSpoon(list_items){
+    async searchSpoon(list_items){
+        var outer_this = this;
         const ingredients_list = list_items.join();
         axios({
             method: "GET",
@@ -77,7 +78,9 @@ export default {
         })
         .then(function(response) {
           console.log(response.data);
-          
+          console.log(outer_this.recipeList)
+          console.log(response)
+          outer_this.recipeList.push(...response.data)
         })
         .catch(function(error) {
             console.log(error.message);
